@@ -36,6 +36,9 @@ class OsStudios_PagSeguroApi_Model_System_Config_Source_Config
 
 	public function getNodeByAttribute($value, $index, $attribute)
 	{
+
+		Mage::log($value, null, '$value.log');
+
 		$arr = $this->getAssociativeArray($index, $attribute);
 		return $arr[$value];
 	}

@@ -45,6 +45,17 @@
                         </request_update_orders>
                     </children>
                 </actions>
+                <customize translate="title">
+                    <title>Customize</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <customize_error_messages translate="title">
+                            <title>Customize Error Messages</title>
+                            <action>pagseguroapi/adminhtml_customize_errors/index</action>
+                            <sort_order>10</sort_order>
+                        </customize_error_messages>
+                    </children>
+                </customize>
                 <payment_configurations translate="title">
                     <title>Configurations</title>
                     <action>adminhtml/system_config/edit/section/payment</action>
@@ -96,6 +107,16 @@
                                     </request_update_orders>
                                 </children>
                             </actions>
+                            <customize translate="title">
+                                <title>Customize</title>
+                                <sort_order>30</sort_order>
+                                <children>
+                                    <customize_error_messages translate="title">
+                                        <title>Customize Error Messages</title>
+                                        <sort_order>10</sort_order>
+                                    </customize_error_messages>
+                                </children>
+                            </customize>
                         </children>
                     </pagseguroapi>
     			</children>

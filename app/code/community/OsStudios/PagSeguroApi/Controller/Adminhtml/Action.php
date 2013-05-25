@@ -24,6 +24,10 @@
 class OsStudios_PagSeguroApi_Controller_Adminhtml_Action extends Mage_Adminhtml_Controller_Action
 {
     
-    
+    protected function _initLayout()
+    {
+    	$this->loadLayout();
+		$this->_title('PagSeguro API');
+    }
     
 }

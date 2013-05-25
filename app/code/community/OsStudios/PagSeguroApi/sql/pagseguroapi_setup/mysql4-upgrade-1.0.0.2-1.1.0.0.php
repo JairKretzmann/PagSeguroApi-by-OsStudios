@@ -14,13 +14,21 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @author     Tiago Sampaio <tiago.sampaio@osstudios.com.br>
  */
-?>
-<fieldset class="form-list">
-    <ul id="payment_form_<?php echo $this->getMethodCode(); ?>" class="pagseguroapi-payment-method" style="display:none;">
-        <?php //if ($this->getShowMessage()): ?>
-        <li><?php echo $this->getMessage(); ?></li>
-        <?php //endif; ?>
-        <!--<li><img src="<?php echo $this->getSkinUrl('images/pagseguroapi/logo-pagseguro.gif')?>"/></li>-->
-        <li><?php echo $this->getLayout()->createBlock('pagseguroapi/api_installments')->toHtml();?></li>
-    </ul>
-</fieldset>
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->run("
+	DROP TABLE IF EXISTS `{$this->getTable('pagseguroapi/error_messages')}`;
+	CREATE TABLE `{$this->getTable('pagseguroapi/error_messages')}` (
+		`code` int(10) UNSIGNED NOT NULL,
+		`pagseguro_message` text,
+		`custom_message` text,
+		`created_at` datetime NOT NULL,
+		`updated_at` datetime NOT NULL,
+	PRIMARY KEY (`code`)
+	);
+");
+
+$installer->endSetup();

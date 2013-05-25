@@ -95,6 +95,8 @@ class OsStudios_PagSeguroApi_Model_Payment_Method_Api extends OsStudios_PagSegur
             Mage::throwException($this->helper()->__('A problem has occured while trying to authorize the transaction in PagSeguro.'));
         }
 
+        Mage::log($body, null, '$body.log');
+
         $hasErrors = $this->_hasErrorInReturn($body);
         if(is_array($hasErrors)) {
             $message = implode("\n", $hasErrors);
@@ -203,10 +205,14 @@ class OsStudios_PagSeguroApi_Model_Payment_Method_Api extends OsStudios_PagSegur
 
                 foreach($xml->error as $error) {
                     if($error->code) {
-                        $codes = Mage::getSingleton('pagseguroapi/system_config_source_error_codes');
-                        $message = $codes->getNodeByAttribute($error->code, 'value', 'message');
+                        $error = Mage::getSingleton('pagseguroapi/payment_errors')->load($error->code);
 
-                        $resultArr[] = $this->helper()->__($message);
+                        $message = $error->getCustomMessage();
+                        if(!$message) {
+                            $message = $error->getPagseguroMessage();
+                        }
+
+                        $resultArr[] = $message;
                     }
                 }
                 return $resultArr;

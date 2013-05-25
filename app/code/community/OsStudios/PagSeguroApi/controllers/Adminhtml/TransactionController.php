@@ -18,15 +18,19 @@
 class OsStudios_PagSeguroApi_Adminhtml_TransactionController extends OsStudios_PagSeguroApi_Controller_Adminhtml_Action
 {
 
+	protected function _initLayout()
+	{
+		parent::_initLayout();
+		$this->_title($this->__('Transaction'))->_title($this->__('View History'));
+	}
+
 	/**
 	 * View Transaction History
 	 *
 	 */
 	public function historyAction()
 	{
-		$this->_title($this->__('PagSeguro API'))->_title($this->__('Transaction'))->_title($this->__('View History'));
-
-		$this->loadLayout();
+		$this->_initLayout();
 		$this->_initLayoutMessages('admin/session');
 		$this->renderLayout();
 	}

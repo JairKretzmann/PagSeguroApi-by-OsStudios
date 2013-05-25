@@ -28,7 +28,19 @@
             <block type="pagseguroapi/adminhtml_transaction_grid" name="pagseguroapi.returns.transaction.grid"/>
         </block>
     </pagseguroapi_adminhtml_transaction_grid>
+
 	<pagseguroapi_adminhtml_actions_updateorders>
 		
 	</pagseguroapi_adminhtml_actions_updateorders>
+
+	<pagseguroapi_adminhtml_customize_errors_index>
+		<reference name="content">
+			<block type="pagseguroapi/adminhtml_customize_errors" name="pagseguroapi.customize.errors" />
+		</reference>
+	</pagseguroapi_adminhtml_customize_errors_index>
+	<pagseguroapi_adminhtml_customize_errors_grid>
+		<block type="core/text_list" name="root" output="toHtml">
+            <block type="pagseguroapi/adminhtml_customize_errors_grid" name="pagseguroapi.customize.errors.grid"/>
+        </block>
+	</pagseguroapi_adminhtml_customize_errors_grid>
 </layout>
