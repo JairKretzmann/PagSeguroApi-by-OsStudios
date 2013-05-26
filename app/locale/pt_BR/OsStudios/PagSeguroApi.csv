@@ -162,3 +162,5 @@
 "Allow or disallow to log transaction by notifications.","Permite ou não logar as transações retornadas nas notificações do PagSeguro."
 "Allow or disallow to log transaction by consults.","Permite ou não logar as transações retornadas nas consultas ao PagSeguro."
 "Allow or disallow to log transaction by mass consults.","Permite ou não logar as transações retornadas nas consultas em massa ao PagSeguro."
+"There was an unknown error in your order.","Ocorreu um problema desconhecido em seu pedido."
+"Error Code: %d, Message: ","Código do Erro: %d, Mensagem: "

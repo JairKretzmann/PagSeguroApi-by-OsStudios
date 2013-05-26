@@ -95,8 +95,6 @@ class OsStudios_PagSeguroApi_Model_Payment_Method_Api extends OsStudios_PagSegur
             Mage::throwException($this->helper()->__('A problem has occured while trying to authorize the transaction in PagSeguro.'));
         }
 
-        Mage::log($body, null, '$body.log');
-
         $hasErrors = $this->_hasErrorInReturn($body);
         if(is_array($hasErrors)) {
             $message = implode("\n", $hasErrors);
@@ -203,13 +201,20 @@ class OsStudios_PagSeguroApi_Model_Payment_Method_Api extends OsStudios_PagSegur
                 
                 $resultArr = array();
 
-                foreach($xml->error as $error) {
-                    if($error->code) {
-                        $error = Mage::getSingleton('pagseguroapi/payment_errors')->load($error->code);
-
-                        $message = $error->getCustomMessage();
-                        if(!$message) {
-                            $message = $error->getPagseguroMessage();
+                foreach($xml->error as $errorXml) {
+                    if(($code = $errorXml->code)) {
+                        $message = $this->helper()->__('Error Code: %d, Message: ', $code);
+                        
+                        $error = Mage::getSingleton('pagseguroapi/payment_errors')->load($code);
+                        
+                        if($error->getCode()) {
+                            if($error->getCustomMessage()) {
+                                $message .= $error->getCustomMessage();
+                            } else {
+                                $message .= $error->getPagseguroMessage();
+                            }
+                        } else {
+                            $message .= $this->helper()->__('There was an unknown error in your order.');
                         }
 
                         $resultArr[] = $message;
